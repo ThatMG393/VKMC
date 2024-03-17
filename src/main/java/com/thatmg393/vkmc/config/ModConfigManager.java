@@ -1,8 +1,21 @@
 package com.thatmg393.vkmc.config;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.nio.file.Paths;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.thatmg393.vkmc.VKMC;
+import com.thatmg393.vkmc.config.data.ModConfigData;
+
+import net.fabricmc.loader.api.FabricLoader;
+
 public class ModConfigManager {
 	private static ModConfigManager INSTANCE = new ModConfigManager();
-	private static final Gson GSON = new GsonBuilder().serializeNulls().setPrettyPrinting().build();
+	private static final Gson GSON = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
 
 	public static final File CONFIG_PATH = new File(Paths.get(
 		FabricLoader.getInstance().getConfigDir().toString(),
@@ -23,8 +36,8 @@ public class ModConfigManager {
 		try (BufferedReader reader = new BufferedReader(new FileReader(CONFIG_PATH))) {
 			loadedConfig = GSON.fromJson(reader, ModConfigData.class);
 		} catch (Exception e) {
-			VKMC.LOGGER.err("Failed to load config, loading with default values!");
-			loadedConfig = DEFAULT_CONFIG.clone();
+			VKMC.LOGGER.error("Failed to load config, loading with default values!");
+			loadedConfig = new ModConfigData();
 			saveConfig();
 		}
 	}
@@ -35,8 +48,8 @@ public class ModConfigManager {
 
 			return true;
 		} catch (Exception e) {
-			VKMC.LOGGER.err("Failed to save config!");
-			VKMC.LOGGER.err(e.toString());
+			VKMC.LOGGER.error("Failed to save config!");
+			VKMC.LOGGER.error(e.toString());
 		}
 
 		return false;
