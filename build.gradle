@@ -25,11 +25,12 @@ dependencies {
     includeLWJGLDeps()
 }
 
-/*
 loom {
     accessWidenerPath = file('src/main/resources/vkmc.accesswidener')
+    /* mixin {
+        
+    } */
 }
-*/
 
 processResources {
     inputs.property 'version', project.version

@@ -15,7 +15,7 @@ public class RenderSystemMixin {
     private static void pollEvents() { }
 
     @Overwrite(remap=false)
-    public static void initRenderSystem(boolean b1, boolean b2) {
+    public static void initRenderer(int i1, boolean b1) {
         renderThread.setPriority(Thread.MAX_PRIORITY - 2);
     }
 

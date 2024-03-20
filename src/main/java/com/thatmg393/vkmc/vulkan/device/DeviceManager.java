@@ -9,7 +9,6 @@ import org.lwjgl.vulkan.VK11;
 import org.lwjgl.vulkan.VkInstance;
 import org.lwjgl.vulkan.VkPhysicalDevice;
 
-import com.thatmg393.vkmc.VKMC;
 import com.thatmg393.vkmc.config.ModConfigManager;
 import com.thatmg393.vkmc.vulkan.exceptions.NoGPUWithVulkanException;
 import com.thatmg393.vkmc.vulkan.utils.MemoryUtils;
