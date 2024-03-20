@@ -1,8 +1,6 @@
 plugins {
     id 'fabric-loom' version '1.5-SNAPSHOT'
     id 'maven-publish'
-    id 'fabric-loom' version '1.5-SNAPSHOT'
-    id 'maven-publish'
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -14,7 +12,6 @@ group = project.maven_group
 
 base {
     archivesName = project.archives_base_name
-    archivesName = project.archives_base_name
 }
 
 repositories { }
@@ -24,31 +21,19 @@ dependencies {
     mappings loom.officialMojangMappings() // "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     // modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.officialMojangMappings() // "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-    // modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    includeLWJGLDeps()
     includeLWJGLDeps()
 }
 
-/*
 /*
 loom {
     accessWidenerPath = file('src/main/resources/vkmc.accesswidener')
-    accessWidenerPath = file('src/main/resources/vkmc.accesswidener')
 }
-*/
 */
 
 processResources {
     inputs.property 'version', project.version
-    inputs.property 'version', project.version
 
-    filesMatching('fabric.mod.json') {
-        expand 'version': project.version
-    }
     filesMatching('fabric.mod.json') {
         expand 'version': project.version
     }
@@ -56,18 +41,13 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
     it.options.release = 17
-    it.options.release = 17
 }
 
 java {
     withSourcesJar()
-    withSourcesJar()
 }
 
 jar {
-    from('LICENSE') {
-        rename { "${it }_${project.base.archivesName.get() }" }
-    }
     from('LICENSE') {
         rename { "${it }_${project.base.archivesName.get() }" }
     }
@@ -79,13 +59,7 @@ publishing {
             from components.java
         }
     }
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
-    }
 
-    repositories { }
     repositories { }
 }
 
@@ -99,7 +73,7 @@ void includeLWJGLDeps() {
                 if (m == 'vulkan' && (n != 'macos' || n != 'macos-arm64')) {
                     return
                 }
-
+                
                 include(runtimeOnly("org.lwjgl:lwjgl-${m}:${project.lwjgl_version}:natives-${n}"))
             }
         }
