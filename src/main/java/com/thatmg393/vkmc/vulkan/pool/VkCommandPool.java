@@ -64,7 +64,7 @@ public class VkCommandPool implements Freeable {
         });
     }
 
-    public long sumbitCommands(VkCommandBuffer cmdBuf, VkQueue queue) {
+    public long submitCommands(VkCommandBuffer cmdBuf, VkQueue queue) {
         return MemoryUtils.executeWithStackForResult(stack -> {
             long fence = cmdBuf.getFence();
 
