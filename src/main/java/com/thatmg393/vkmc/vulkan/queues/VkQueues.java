@@ -1,6 +1,22 @@
 package com.thatmg393.vkmc.vulkan.queues;
 
-public class VkQueues {
-    public static final VkCommandQueue GRAPHICS_QUEUE = new VkCommandQueue(0);
-    public static final VkCommandQueue TRANSFER_QUEUE = new VkCommandQueue(0);
+public enum VkQueues {
+    GRAPHICS_QUEUE(VkQueueFamilies.getGraphicsFamily()),
+    TRANSFER_QUEUE(VkQueueFamilies.getTransferFamily());
+
+    private int family;
+    private VkCommandQueue vkCmdQueue;
+
+    VkQueues(int family) {
+        this.family = family;
+        this.vkCmdQueue = new VkCommandQueue(family);
+    }
+
+    public int getFamily() {
+        return this.family;
+    }
+
+    public VkCommandQueue getCommandQueue() {
+        return this.vkCmdQueue;
+    }
 }

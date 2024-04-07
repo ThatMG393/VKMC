@@ -54,6 +54,10 @@ public class PhysicalDevice {
     }
 
     private VkPhysicalDeviceProperties deviceProperties;
+    public VkPhysicalDeviceProperties getDeviceProperties() {
+        return deviceProperties;
+    }
+
     private VkPhysicalDeviceFeatures2 deviceFeatures;
     private VkPhysicalDeviceVulkan11Features deviceFeaturesVK11;
 

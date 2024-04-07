@@ -17,7 +17,6 @@ import com.thatmg393.vkmc.VKMC;
 import com.thatmg393.vkmc.vulkan.device.DeviceManager;
 import com.thatmg393.vkmc.vulkan.exceptions.FailedToCreateVulkanInstance;
 import com.thatmg393.vkmc.vulkan.utils.MemoryUtils;
-import com.thatmg393.vkmc.vulkan.utils.ReturnUtils;
 
 public class Vulkan {
     private static final Vulkan INSTANCE = new Vulkan();
@@ -100,10 +99,8 @@ public class Vulkan {
             vmaAllocCreateInfo.vulkanApiVersion(VK_API_VERSION);
 
             PointerBuffer vmaPtr = stack.pointers(VK10.VK_NULL_HANDLE);
-            if (!ReturnUtils.isVkSuccess(
-                Vma.vmaCreateAllocator(vmaAllocCreateInfo, vmaPtr)
-            )) {
-                throw new RuntimeException("no allocation lool");
+            if (Vma.vmaCreateAllocator(vmaAllocCreateInfo, vmaPtr) != VK10.VK_SUCCESS) {
+                throw new RuntimeException("Failed to create VMA.");
             }
 
             this.vmaPointer = vmaPtr.get(0);

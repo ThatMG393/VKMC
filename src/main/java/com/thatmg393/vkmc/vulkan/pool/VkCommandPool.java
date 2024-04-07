@@ -15,7 +15,6 @@ import com.thatmg393.vkmc.vulkan.device.DeviceManager;
 import com.thatmg393.vkmc.vulkan.interfaces.Freeable;
 import com.thatmg393.vkmc.vulkan.pool.buffer.VkCommandBuffer;
 import com.thatmg393.vkmc.vulkan.utils.MemoryUtils;
-import com.thatmg393.vkmc.vulkan.utils.ReturnUtils;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
@@ -32,14 +31,12 @@ public class VkCommandPool implements Freeable {
             cmdPoolCreateInfo.flags(VK10.VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT);
 
             LongBuffer cmdPoolPtr = stack.mallocLong(1);
-            if (ReturnUtils.isVkSuccess(
-                VK10.vkCreateCommandPool(
+            if (VK10.vkCreateCommandPool(
                     DeviceManager.getInstance().getSelectedDevice().getAsLogicalDevice(),
                     cmdPoolCreateInfo,
                     null,
                     cmdPoolPtr
-                )
-            )) {
+            ) != VK10.VK_SUCCESS) {
                 throw new RuntimeException("creating command pool failed");
             }
 
